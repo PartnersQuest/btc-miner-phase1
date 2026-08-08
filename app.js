@@ -1,5 +1,6 @@
 import { sha256d, toHex, fromHex } from './sha256d.js';
 import { SHA256D_TEST_VECTORS } from './vectors.js';
+import { runBlockHeaderTests } from './blockheader-tests.js';
 
 // ---------- SHA256d manual test ----------
 
@@ -53,6 +54,36 @@ async function runVectorTests() {
 }
 
 document.getElementById('run-tests-button').addEventListener('click', runVectorTests);
+
+// ---------- Block header / target tests (Phase 3/4, real genesis block) ----------
+
+const headerTestList = document.getElementById('header-test-list');
+
+async function runHeaderTests() {
+  headerTestList.innerHTML = '';
+  const results = await runBlockHeaderTests();
+  for (const r of results) {
+    const row = document.createElement('div');
+    row.className = 'vector-row';
+
+    const label = document.createElement('span');
+    label.textContent = r.label;
+
+    const badge = document.createElement('span');
+    badge.className = `badge ${r.pass ? 'pass' : 'fail'}`;
+    badge.textContent = r.pass ? 'PASS' : 'FAIL';
+
+    row.appendChild(label);
+    row.appendChild(badge);
+    headerTestList.appendChild(row);
+
+    if (!r.pass) {
+      console.error(`Header test "${r.label}" FAILED`);
+    }
+  }
+}
+
+document.getElementById('run-header-tests-button').addEventListener('click', runHeaderTests);
 
 // ---------- Benchmark ----------
 
@@ -161,3 +192,4 @@ if ('serviceWorker' in navigator) {
 
 // Run vector tests automatically on load
 runVectorTests();
+runHeaderTests();
