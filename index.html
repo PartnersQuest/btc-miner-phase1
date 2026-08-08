@@ -1,27 +1,69 @@
-BITCOIN MINER — PHASE 1
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Bitcoin Miner — Phase 1</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#0b0f14" />
+</head>
+<body>
+  <header>
+    <h1>BITCOIN MINER — PHASE 1</h1>
+    <p>SHA256d réel · PWA · aucune simulation</p>
+  </header>
 
-SHA256d réel · PWA · aucune simulation
+  <main>
+    <section class="panel">
+      <h2>SHA256d Test</h2>
+      <input type="text" id="hash-input" value="hello" autocapitalize="off" autocorrect="off" />
+      <button id="hash-button">HASH</button>
+      <div class="hash-output" id="hash-output">—</div>
+    </section>
 
-SHA256d Test
+    <section class="panel">
+      <h2>Vecteurs de test connus</h2>
+      <div id="vector-list"></div>
+      <button class="secondary" id="run-tests-button" style="margin-top: 0.75rem;">Relancer les tests</button>
+    </section>
 
-  HASH
-—
-Vecteurs de test connus
+    <section class="panel">
+      <h2>Benchmark</h2>
+      <div class="button-row">
+        <button id="start-benchmark">START</button>
+        <button class="secondary" id="stop-benchmark">STOP</button>
+      </div>
+      <div class="stats-grid" style="margin-top: 0.9rem;">
+        <div class="stat">
+          <div class="value" id="stat-hashrate">0 H/s</div>
+          <div class="label">Hashrate</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="stat-total-hashes">0</div>
+          <div class="label">Hashes</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="stat-elapsed">00:00:00</div>
+          <div class="label">Elapsed</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="stat-best-hash" style="font-size: 0.65rem;">—</div>
+          <div class="label">Best</div>
+        </div>
+      </div>
+    </section>
 
-Relancer les tests
-Benchmark
+    <section class="panel">
+      <h2>Device</h2>
+      <div class="device-row"><span>Workers actifs</span><span id="device-workers">—</span></div>
+      <div class="device-row"><span>Navigateur</span><span id="device-ua">—</span></div>
+      <div class="device-row"><span>Web Crypto disponible</span><span id="device-webcrypto">—</span></div>
+    </section>
+  </main>
 
-START  STOP
-0 H/s
-Hashrate
-0
-Hashes
-00:00:00
-Elapsed
-—
-Best
-Device
-
-Workers actifs—
-Navigateur—
-Web Crypto disponible—
+  <script type="module" src="app.js"></script>
+</body>
+</html>
