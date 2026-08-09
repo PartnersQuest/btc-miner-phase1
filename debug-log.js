@@ -1,4 +1,4 @@
-
+/**
  * debug-log.js
  *
  * Without a Mac, there is no way to open Safari's Web Inspector on this
