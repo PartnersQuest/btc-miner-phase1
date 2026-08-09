@@ -37,6 +37,53 @@
     </section>
 
     <section class="panel">
+      <h2>Mining réel — bloc complet (test/regtest)</h2>
+      <p style="color: var(--muted); font-size: 0.75rem; margin-top: 0;">
+        Aucun réseau Bitcoin réel connecté pour l'instant (pas de relais). Le bloc précédent
+        et la difficulté sont des valeurs de test locales — tout le reste (coinbase, Merkle
+        root, header, SHA256d, recherche de nonce, validation) est un vrai calcul.
+      </p>
+
+      <div class="device-row"><span>Adresse de payout</span></div>
+      <div class="hash-output" style="margin-bottom:0.6rem;">bc1qtqukcc9jhqcug77k4pd52dmkn30y08jgmvzjnl</div>
+
+      <label style="font-size:0.75rem;color:var(--muted);">Difficulté test (bits de zéros en tête)</label>
+      <input type="text" id="mining-difficulty" value="20" style="margin-top:0.3rem;" />
+
+      <button class="secondary" id="build-template-button">CONSTRUIRE LE TEMPLATE</button>
+      <div class="hash-output" id="template-output">—</div>
+
+      <div class="button-row" style="margin-top:0.6rem;">
+        <button id="start-mining-button" disabled>START MINING</button>
+        <button class="secondary" id="stop-mining-button" disabled>STOP</button>
+      </div>
+
+      <div class="stats-grid" style="margin-top: 0.9rem;">
+        <div class="stat">
+          <div class="value" id="mining-hashrate">0 H/s</div>
+          <div class="label">Hashrate</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="mining-hashes">0</div>
+          <div class="label">Hashes</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="mining-elapsed">00:00:00</div>
+          <div class="label">Elapsed</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="mining-status">STOPPED</div>
+          <div class="label">Status</div>
+        </div>
+      </div>
+
+      <div id="block-found-panel" style="display:none; margin-top:0.9rem;">
+        <h2 style="color:var(--green);">BLOCK FOUND</h2>
+        <div id="block-found-details"></div>
+      </div>
+    </section>
+
+    <section class="panel">
       <h2>Benchmark</h2>
       <div class="button-row">
         <button id="start-benchmark">START</button>
