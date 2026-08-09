@@ -1,4 +1,4 @@
-const CACHE_NAME = 'btc-miner-phase1-v2';
+const CACHE_NAME = 'btc-miner-phase1-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -10,6 +10,13 @@ const ASSETS = [
   './blockheader.js',
   './target.js',
   './blockheader-tests.js',
+  './debug-log.js',
+  './merkletree.js',
+  './address.js',
+  './coinbase.js',
+  './blocktemplate.js',
+  './mining-worker.js',
+  './block-validator.js',
   './manifest.json',
   './icon.svg'
 ];
