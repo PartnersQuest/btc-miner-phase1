@@ -11,6 +11,45 @@
   <meta name="theme-color" content="#0b0f14" />
 </head>
 <body>
+  <!-- Diagnostic auto-exécuté, indépendant de tout module ES —
+       s'affiche même si app.js/index.html plantent complètement. -->
+  <div id="file-check-panel" style="background:#1a0f00;border:2px solid #f7931a;border-radius:8px;padding:0.75rem;margin:0.75rem;font-family:monospace;font-size:0.7rem;color:#fff;">
+    <strong>Vérification des fichiers...</strong>
+    <div id="file-check-results"></div>
+  </div>
+  <script>
+    (function () {
+      var files = [
+        'style.css', 'app.js', 'sha256d.js', 'sha256d-worker.js', 'vectors.js',
+        'blockheader.js', 'target.js', 'blockheader-tests.js', 'debug-log.js',
+        'merkletree.js', 'address.js', 'coinbase.js', 'blocktemplate.js',
+        'mining-worker.js', 'block-validator.js', 'manifest.json'
+      ];
+      var results = document.getElementById('file-check-results');
+      files.forEach(function (f) {
+        fetch(f, { cache: 'no-store' })
+          .then(function (res) {
+            var line = document.createElement('div');
+            line.style.color = res.ok ? '#3fb950' : '#f85149';
+            line.textContent = (res.ok ? 'OK  ' : 'FAIL(' + res.status + ') ') + f;
+            results.appendChild(line);
+          })
+          .catch(function (err) {
+            var line = document.createElement('div');
+            line.style.color = '#f85149';
+            line.textContent = 'ERROR ' + f + ' — ' + err.message;
+            results.appendChild(line);
+          });
+      });
+      window.addEventListener('error', function (e) {
+        var line = document.createElement('div');
+        line.style.color = '#f85149';
+        line.textContent = 'JS ERROR: ' + e.message + ' (' + e.filename + ':' + e.lineno + ')';
+        results.appendChild(line);
+      });
+    })();
+  </script>
+
   <header>
     <h1>BITCOIN MINER — PHASE 1</h1>
     <p>SHA256d réel · PWA · aucune simulation</p>
