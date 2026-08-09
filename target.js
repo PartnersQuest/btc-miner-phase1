@@ -80,4 +80,21 @@ function bitsToDifficulty(bits) {
   return Number(maxTarget / currentTarget) + Number(maxTarget % currentTarget) / Number(currentTarget);
 }
 
-export { bitsToTarget, hashMeetsTarget, bitsToDifficulty };
+/**
+ * @param {number} leadingZeroBits - how many leading zero bits the target should have (0-256)
+ * @returns {string} 64-char hex target = 2^(256 - leadingZeroBits) - 1
+ *   Used for locally-adjustable TEST/REGTEST-style difficulty, so a real
+ *   block can actually be found on-device in a reasonable time to
+ *   demonstrate the full pipeline end-to-end. This has nothing to do with
+ *   real mainnet nBits — it's a local-only knob for testing.
+ */
+function leadingZeroBitsToTarget(leadingZeroBits) {
+  if (leadingZeroBits < 0 || leadingZeroBits > 256) {
+    throw new Error('leadingZeroBits must be between 0 and 256');
+  }
+  const maxTarget = (1n << 256n) - 1n;
+  const target = maxTarget >> BigInt(leadingZeroBits);
+  return target.toString(16).padStart(64, '0');
+}
+
+export { bitsToTarget, hashMeetsTarget, bitsToDifficulty, leadingZeroBitsToTarget };
